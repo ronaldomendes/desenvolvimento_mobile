@@ -10,8 +10,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: "First Flutter App",
         home: Scaffold(
-          backgroundColor: Color.fromRGBO(255, 255, 200, 0.5),
-          appBar: AppBar(title: Text("Flutter Demo App"), centerTitle: true),
+          backgroundColor: Color.fromRGBO(0, 255, 215, 0.3),
+          appBar: AppBar(
+            title: Text("Flutter Demo App"),
+            backgroundColor: Color.fromRGBO(255, 200, 25, 0.3),
+            centerTitle: true,
+          ),
           body: Center(child: Text("Hello Flooter! Hahahah")),
         ));
   }
