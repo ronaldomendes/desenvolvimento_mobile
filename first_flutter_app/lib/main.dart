@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(FirstFlutterApp());
 }
 
-class MyApp extends StatelessWidget {
+class FirstFlutterApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,7 +18,10 @@ class MyApp extends StatelessWidget {
           ),
           body: Center(
               child: Text("Hello Flooter! Hahahah",
-                  style: TextStyle(fontSize: 30, fontFamily: 'Roboto'))),
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      fontStyle: FontStyle.italic))),
         ));
   }
 }
