@@ -16,7 +16,9 @@ class MyApp extends StatelessWidget {
             backgroundColor: Color.fromRGBO(255, 200, 25, 0.3),
             centerTitle: true,
           ),
-          body: Center(child: Text("Hello Flooter! Hahahah")),
+          body: Center(
+              child: Text("Hello Flooter! Hahahah",
+                  style: TextStyle(fontSize: 30, fontFamily: 'Roboto'))),
         ));
   }
 }
