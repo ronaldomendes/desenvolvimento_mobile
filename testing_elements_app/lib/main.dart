@@ -10,8 +10,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Dado',
-      home: Container(color: Colors.blue,),
+      home: Column(
+        children: [Text("Hello"), Text("Username"), Text("Password")],
+      ),
     );
   }
 }
-
