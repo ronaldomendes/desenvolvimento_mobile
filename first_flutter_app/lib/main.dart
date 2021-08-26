@@ -10,18 +10,19 @@ class FirstFlutterApp extends StatelessWidget {
     return MaterialApp(
         title: "First Flutter App",
         home: Scaffold(
-          backgroundColor: Color.fromRGBO(0, 255, 215, 0.3),
+          backgroundColor: Color.fromRGBO(255, 255, 0, 0.3),
           appBar: AppBar(
-            title: Text("Flutter Demo App"),
-            backgroundColor: Color.fromRGBO(255, 200, 25, 0.3),
+            title: Text("Engenharia".toUpperCase()),
+            backgroundColor: Color.fromRGBO(0, 255, 0, 0.3),
             centerTitle: true,
           ),
           body: Center(
-              child: Text("Hello Flooter! Hahahah",
+              child: Text("Impacta".toUpperCase(),
                   style: TextStyle(
-                      fontSize: 30,
+                      fontSize: 50,
                       fontWeight: FontWeight.bold,
-                      fontStyle: FontStyle.italic))),
+                      fontStyle: FontStyle.italic,
+                      color: Colors.blue))),
         ));
   }
 }
