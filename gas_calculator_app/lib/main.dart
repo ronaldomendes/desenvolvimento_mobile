@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -16,17 +17,66 @@ class GasApp extends StatefulWidget {
 class _GasApp extends State<GasApp> {
   TextEditingController _textAlcool = TextEditingController();
   TextEditingController _textGasolina = TextEditingController();
+  String _appTitle = 'Álcool ou Gasolina';
+  String _imagePath = 'images/alcool.png';
+  String _labelAlcool = 'Preço Alcool, ex: 2.59 ou 2,59';
+  String _labelGasolina = 'Preço Gasolina, ex: 4.99 ou 4,99';
+  String _mainText =
+      'Saiba qual a melhor opção para abastecimento do seu carro';
+  String _resultText = '';
+  Color _resultColor = Colors.black;
+
+  void _calcular() {
+    final chars = RegExp(r'^[^0-9\.,]+$');
+    if (_textAlcool.text == '' || _textGasolina.text == '') {
+      setState(() {
+        _resultText = 'Todos os campos são obrigatórios';
+        _resultColor = Colors.red;
+      });
+    } else if (chars.hasMatch(_textAlcool.text) ||
+        chars.hasMatch(_textGasolina.text)) {
+      setState(() {
+        _resultText = 'Informe apenas números';
+        _resultColor = Colors.red;
+      });
+    } else {
+      try {
+        double alcool =
+            double.parse(_textAlcool.text.trim().replaceAll(',', '.'));
+        double gasolina =
+            double.parse(_textGasolina.text.trim().replaceAll(',', '.'));
+        if ((alcool / gasolina) >= 0.7) {
+          setState(() {
+            _resultText = 'Melhor abastecer com gasolina';
+          });
+        } else {
+          setState(() {
+            _resultText = 'Melhor abastecer com álcool';
+          });
+        }
+      } catch (err) {
+        setState(() {
+          _resultText = 'Formato numérico inválido';
+          _resultColor = Colors.red;
+        });
+      }
+      _textAlcool.text = '';
+      _textGasolina.text = '';
+    }
+  }
+
+  void _backToDefault() {
+    Timer.periodic(Duration(seconds: 3), (Timer t) {
+      setState(() {
+        _resultText = '';
+        _resultColor = Colors.black;
+      });
+      t.cancel();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    String _appTitle = 'Álcool ou Gasolina';
-    String _imagePath = 'images/alcool.png';
-    String _labelAlcool = 'Preço Alcool, ex: 2.59';
-    String _labelGasolina = 'Preço Gasolina, ex: 4.00';
-    String _mainText =
-        'Saiba qual a melhor opção para abastecimento do seu carro';
-    String _resultText = 'Resultado';
-
     return Scaffold(
         appBar: AppBar(
           title: Text(_appTitle),
@@ -51,13 +101,13 @@ class _GasApp extends State<GasApp> {
               TextField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(labelText: _labelAlcool),
-                style: TextStyle(fontSize: 22),
+                style: TextStyle(fontSize: 15),
                 controller: _textAlcool,
               ),
               TextField(
                 keyboardType: TextInputType.number,
                 decoration: InputDecoration(labelText: _labelGasolina),
-                style: TextStyle(fontSize: 22),
+                style: TextStyle(fontSize: 15),
                 controller: _textGasolina,
               ),
               Padding(
@@ -69,13 +119,18 @@ class _GasApp extends State<GasApp> {
                       'Calcular',
                       style: TextStyle(fontSize: 20),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      _calcular();
+                      _backToDefault();
+                    },
                   )),
               Padding(
                   padding: EdgeInsets.only(top: 20),
                   child: Text(_resultText,
-                      style:
-                          TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: _resultColor),
                       textAlign: TextAlign.center))
             ],
           ),
