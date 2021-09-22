@@ -26,6 +26,18 @@ class _GasApp extends State<GasApp> {
   String _resultText = '';
   Color _resultColor = Colors.black;
 
+  double _parseTextToDouble(String text) {
+    return double.parse(text.trim().replaceAll(',', '.'));
+  }
+
+  TextField _generateTextField(String label, TextEditingController controller) {
+    return TextField(
+        keyboardType: TextInputType.number,
+        decoration: InputDecoration(labelText: label),
+        style: TextStyle(fontSize: 15),
+        controller: controller);
+  }
+
   void _calcular() {
     final chars = RegExp(r'^[^0-9\.,]+$');
     if (_textAlcool.text == '' || _textGasolina.text == '') {
@@ -41,10 +53,8 @@ class _GasApp extends State<GasApp> {
       });
     } else {
       try {
-        double alcool =
-            double.parse(_textAlcool.text.trim().replaceAll(',', '.'));
-        double gasolina =
-            double.parse(_textGasolina.text.trim().replaceAll(',', '.'));
+        double alcool = _parseTextToDouble(_textAlcool.text);
+        double gasolina = _parseTextToDouble(_textGasolina.text);
         if ((alcool / gasolina) >= 0.7) {
           setState(() {
             _resultText = 'Melhor abastecer com gasolina';
@@ -98,18 +108,8 @@ class _GasApp extends State<GasApp> {
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   )),
-              TextField(
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: _labelAlcool),
-                style: TextStyle(fontSize: 15),
-                controller: _textAlcool,
-              ),
-              TextField(
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: _labelGasolina),
-                style: TextStyle(fontSize: 15),
-                controller: _textGasolina,
-              ),
+              _generateTextField(_labelAlcool, _textAlcool),
+              _generateTextField(_labelGasolina, _textGasolina),
               Padding(
                   padding: EdgeInsets.only(top: 10),
                   child: ElevatedButton(
