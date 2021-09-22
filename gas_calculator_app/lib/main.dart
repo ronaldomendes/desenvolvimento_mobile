@@ -60,9 +60,9 @@ class _GasApp extends State<GasApp> {
           _resultColor = Colors.red;
         });
       }
-      _textAlcool.text = '';
-      _textGasolina.text = '';
     }
+    _textAlcool.text = '';
+    _textGasolina.text = '';
   }
 
   void _backToDefault() {
