@@ -13,27 +13,29 @@ class _AnimationsApp extends State<AnimationsApp> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        AnimatedContainer(
-          padding: EdgeInsets.all(20),
-          width: _status ? 200 : 300,
-          height: _status ? 300 : 200,
-          color: _status ? Colors.white : Colors.purpleAccent,
-          child: Image.asset("images/logo.png"),
-          duration: Duration(seconds: 2),
-          curve: Curves.elasticInOut,
-        ),
-        ElevatedButton(
-          child: Text("Alterar"),
-          onPressed: () {
-            setState(() {
-              _status = !_status;
-            });
-          },
-        )
-      ],
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text("Meu App"),
+      ),
+      body: AnimatedContainer(
+        duration: Duration(seconds: 1),
+        color: Colors.green,
+        padding: EdgeInsets.all(10),
+        height: _status ? 0 : 100,
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.orange,
+        foregroundColor: Colors.white,
+        elevation: 6,
+        child: Icon(Icons.add_box),
+        onPressed: () {
+          setState(() {
+            _status = !_status;
+          });
+        },
+      ),
     );
   }
 }
