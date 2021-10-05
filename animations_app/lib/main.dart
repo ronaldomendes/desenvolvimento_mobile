@@ -21,8 +21,20 @@ class _AnimationsApp extends State<AnimationsApp> {
       body: AnimatedContainer(
         duration: Duration(seconds: 1),
         color: Colors.green,
-        padding: EdgeInsets.all(10),
-        height: _status ? 0 : 100,
+        padding: EdgeInsets.only(bottom: 100, top: 20),
+        alignment: _status ? Alignment.bottomCenter : Alignment.topCenter,
+        child: AnimatedOpacity(
+          duration: Duration(seconds: 1),
+          opacity: _status ? 1 : 0,
+          child: Container(
+            height: 50,
+            child: Icon(
+              Icons.airplanemode_active,
+              size: 50,
+              color: Colors.white,
+            ),
+          ),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton(
